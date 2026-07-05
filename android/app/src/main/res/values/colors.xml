@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Palette reprise de la charte visuelle "CipherTalk" originale -->
+    <color name="bg">#08090D</color>
+    <color name="bg2">#0D0F16</color>
+    <color name="bg3">#13151F</color>
+    <color name="panel">#181B27</color>
+    <color name="border">#252838</color>
+    <color name="border2">#2E324A</color>
+
+    <color name="accent">#4AF0C4</color>
+    <color name="accent_dark">#0A1A14</color>
+    <color name="alice">#4AF0C4</color>
+    <color name="bob">#A78BFA</color>
+    <color name="danger">#F06060</color>
+    <color name="warning">#F0C14A</color>
+
+    <color name="text_primary">#E2E4F0</color>
+    <color name="text_dim">#7880A0</color>
+    <color name="text_faint">#3A3F58</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+</resources>

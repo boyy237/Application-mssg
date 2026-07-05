@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <color name="accent">#4AF0C4</color>
+    <color name="accent_dark">#0A1A14</color>
+    <color name="alice">#4AF0C4</color>
+    <color name="bg">#08090D</color>
+    <color name="bg2">#0D0F16</color>
+    <color name="bg3">#13151F</color>
+    <color name="black">#000000</color>
+    <color name="bob">#A78BFA</color>
+    <color name="border">#252838</color>
+    <color name="border2">#2E324A</color>
+    <color name="danger">#F06060</color>
+    <color name="panel">#181B27</color>
+    <color name="text_dim">#7880A0</color>
+    <color name="text_faint">#3A3F58</color>
+    <color name="text_primary">#E2E4F0</color>
+    <color name="transparent">#00000000</color>
+    <color name="warning">#F0C14A</color>
+    <color name="white">#FFFFFF</color>
+    <dimen name="avatar_size">42dp</dimen>
+    <dimen name="padding_card">16dp</dimen>
+    <dimen name="padding_screen">20dp</dimen>
+    <dimen name="radius_bubble">14dp</dimen>
+    <dimen name="radius_card">16dp</dimen>
+    <string name="action_login">Se connecter</string>
+    <string name="action_register">Créer un compte</string>
+    <string name="app_name">Crypton</string>
+    <string name="apply_key">Appliquer</string>
+    <string name="cancel">Annuler</string>
+    <string name="cipher_label">crypter</string>
+    <string name="confirm_delete_message">Supprimer ce message pour tout le monde ?</string>
+    <string name="conversations_title">Conversations</string>
+    <string name="delete">Supprimer</string>
+    <string name="delete_message">Supprimer le message</string>
+    <string name="email">Adresse email</string>
+    <string name="empty_conversations">Aucune conversation pour le moment.\nLancez-en une nouvelle !</string>
+    <string name="generate_key"> auto Générer </string>
+    <string name="have_account">Déjà un compte ? Se connecter</string>
+    <string name="key_settings">Clé partagée (a, b)</string>
+    <string name="login_title">Connexion</string>
+    <string name="logout">Déconnexion</string>
+    <string name="message_hint">Votre message (en clair)…</string>
+    <string name="new_conversation">Nouvelle conversation</string>
+    <string name="no_account_yet">Pas encore de compte ? S\'inscrire</string>
+    <string name="offline">Hors ligne</string>
+    <string name="online">En ligne</string>
+    <string name="password">Mot de passe</string>
+    <string name="register_title">Créer un compte</string>
+    <string name="search_username_hint">Rechercher un nom d\'utilisateur…</string>
+    <string name="send">Envoyer</string>
+    <string name="tagline"> Chiffrement de message</string>
+    <string name="typing_indicator">est en train d\'écrire…</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="username_or_email">Nom d\'utilisateur ou email</string>
+    <style name="Theme.CipherTalk" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorPrimaryVariant">@color/accent</item>
+        <item name="colorOnPrimary">@color/accent_dark</item>
+        <item name="colorSecondary">@color/bob</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:colorBackground">@color/bg</item>
+        <item name="colorSurface">@color/panel</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorOnBackground">@color/text_primary</item>
+        <item name="android:statusBarColor">@color/bg</item>
+        <item name="android:navigationBarColor">@color/bg</item>
+        <item name="android:windowLightStatusBar" ns1:targetApi="23">false</item>
+    </style>
+    <style name="Theme.CipherTalk.NoAction" parent="Theme.CipherTalk"/>
+</resources>

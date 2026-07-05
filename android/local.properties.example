@@ -1,0 +1,3 @@
+## Copiez ce fichier en "local.properties" (Android Studio le génère normalement seul
+## à la première ouverture du projet en y mettant le chemin de votre SDK Android).
+# sdk.dir=/chemin/vers/votre/Android/sdk

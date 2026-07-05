@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Crypton</string>
+    <string name="tagline"> Chiffrement de message</string>
+
+    <!-- Connexion / Inscription -->
+    <string name="login_title">Connexion</string>
+    <string name="username_or_email">Nom d\'utilisateur ou email</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="email">Adresse email</string>
+    <string name="password">Mot de passe</string>
+    <string name="action_login">Se connecter</string>
+    <string name="action_register">Créer un compte</string>
+    <string name="no_account_yet">Pas encore de compte ? S\'inscrire</string>
+    <string name="have_account">Déjà un compte ? Se connecter</string>
+    <string name="register_title">Créer un compte</string>
+
+    <!-- Conversations -->
+    <string name="conversations_title">Conversations</string>
+    <string name="empty_conversations">Aucune conversation pour le moment.\nLancez-en une nouvelle !</string>
+    <string name="new_conversation">Nouvelle conversation</string>
+    <string name="search_username_hint">Rechercher un nom d\'utilisateur…</string>
+    <string name="logout">Déconnexion</string>
+
+    <!-- Chat -->
+    <string name="message_hint">Votre message (en clair)…</string>
+    <string name="send">Envoyer</string>
+    <string name="key_settings">Clé partagée (a, b)</string>
+    <string name="generate_key"> auto Générer </string>
+    <string name="apply_key">Appliquer</string>
+    <string name="cipher_label">crypter</string>
+    <string name="typing_indicator">est en train d\'écrire…</string>
+    <string name="online">En ligne</string>
+    <string name="offline">Hors ligne</string>
+    <string name="delete_message">Supprimer le message</string>
+    <string name="confirm_delete_message">Supprimer ce message pour tout le monde ?</string>
+    <string name="cancel">Annuler</string>
+    <string name="delete">Supprimer</string>
+</resources>

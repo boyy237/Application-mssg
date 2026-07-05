@@ -1,0 +1,146 @@
+[
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_send.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_send.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/layout_activity_register.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/layout/activity_register.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_back.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_back.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_done.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_done.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_bg_panel_card.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/bg_panel_card.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_bg_send_button.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/bg_send_button.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/layout_activity_chat.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/layout/activity_chat.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_bg_avatar_circle.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/bg_avatar_circle.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_delete.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_delete.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_bg_bubble_received.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/bg_bubble_received.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/layout_item_message_received.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/layout/item_message_received.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/menu_menu_message_long_press.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/menu/menu_message_long_press.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_lock.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_lock.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_person.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_person.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_bg_online_dot.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/bg_online_dot.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_launcher.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_launcher.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_done_all.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_done_all.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_search.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_search.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/layout_activity_new_conversation.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/layout/activity_new_conversation.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/xml_backup_rules.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_circle.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_circle.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_more_vert.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_more_vert.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_settings.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_bg_status_badge.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/bg_status_badge.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/layout_item_user_search.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/layout/item_user_search.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_bg_offline_dot.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/bg_offline_dot.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_bg_input_field.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/bg_input_field.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/layout_dialog_key_settings.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/layout/dialog_key_settings.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/layout_item_conversation.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/layout/item_conversation.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_bg_key_chip.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/bg_key_chip.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_logout.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_logout.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_bg_bubble_sent.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/bg_bubble_sent.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/drawable_ic_add.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/drawable/ic_add.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/layout_activity_login.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/layout/activity_login.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/layout_item_message_sent.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/layout/item_message_sent.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-debug-40:/layout_activity_conversations.xml.flat",
+        "source": "com.ciphertalk.messenger.app-main-42:/layout/activity_conversations.xml"
+    }
+]
