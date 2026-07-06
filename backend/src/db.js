@@ -1,5 +1,3 @@
-const { Pool } = require('pg');
-const config = require('./config');
 
 // Pool de connexions PostgreSQL partagé par toute l'application.
 const { Pool } = require('pg');
