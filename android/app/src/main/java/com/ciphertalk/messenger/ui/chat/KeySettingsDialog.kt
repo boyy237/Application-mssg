@@ -67,13 +67,13 @@ fun showKeySettingsDialog(
         }
 
         // Table de substitution
-        binding.rowPlain.removeAllViews()
-        binding.rowCipher.removeAllViews()
-        val table = AffineCipher.buildSubstitutionTable(a, b)
-        for ((plain, cipher) in table) {
-            binding.rowPlain.addView(buildTableCell(context, plain.toString(), R.color.text_dim))
-            binding.rowCipher.addView(buildTableCell(context, cipher.toString(), R.color.accent))
-        }
+//        binding.rowPlain.removeAllViews()
+//        binding.rowCipher.removeAllViews()
+//        val table = AffineCipher.buildSubstitutionTable(a, b)
+//        for ((plain, cipher) in table) {
+//            binding.rowPlain.addView(buildTableCell(context, plain.toString(), R.color.text_dim))
+//            binding.rowCipher.addView(buildTableCell(context, cipher.toString(), R.color.accent))
+//        }
 
         binding.buttonApply.isEnabled = valid
     }

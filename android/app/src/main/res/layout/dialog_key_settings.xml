@@ -30,13 +30,7 @@
             android:textColor="@color/accent"
             android:textSize="11sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="E(x) = (a·x + b) mod 26 — pgcd(a, 26) = 1"
-            android:textColor="@color/text_dim"
-            android:textSize="11sp" />
+
 
         <!-- Champs a et b -->
         <LinearLayout
@@ -119,41 +113,6 @@
                 tools:text="b = [1 a 25]" />
         </LinearLayout>
 
-        <!-- Table de substitution -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Table de substitution"
-            android:textColor="@color/text_dim"
-            android:textSize="11sp"
-            android:letterSpacing="0.08" />
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/rowPlain"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" />
-
-                <LinearLayout
-                    android:id="@+id/rowCipher"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:orientation="horizontal" />
-            </LinearLayout>
-        </HorizontalScrollView>
 
         <!-- Boutons -->
         <LinearLayout

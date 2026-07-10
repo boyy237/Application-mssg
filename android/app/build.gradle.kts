@@ -18,7 +18,8 @@ android {
         // - Émulateur Android Studio -> "http://10.0.2.2:4000/"
         // - Téléphone physique sur le même Wi-Fi -> "http://VOTRE_IP_LOCALE:4000/"
         // - Serveur déployé en ligne -> votre URL HTTPS publique
-        buildConfigField("String", "BASE_URL", "\"http://192.168.12.243:4000/\"")
+        buildConfigField("String", "BASE_URL", "\"https://application-mssg-1.onrender.com/\"")
+
     }
 
     buildTypes {

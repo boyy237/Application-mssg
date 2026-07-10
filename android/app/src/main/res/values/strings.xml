@@ -25,7 +25,7 @@
     <!-- Chat -->
     <string name="message_hint">Votre message (en clair)…</string>
     <string name="send">Envoyer</string>
-    <string name="key_settings">Clé partagée (a, b)</string>
+    <string name="key_settings">applique une cle pour chiffrer / dechiffrer ton message. la cle doit etre secret </string>
     <string name="generate_key"> auto Générer </string>
     <string name="apply_key">Appliquer</string>
     <string name="cipher_label">crypter</string>
