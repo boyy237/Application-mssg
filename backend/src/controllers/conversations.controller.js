@@ -1,149 +1,141 @@
-/**
- * messages.controller.js — VERSION MISE À JOUR avec notifications FCM
- * Remplace entièrement backend/src/controllers/messages.controller.js
- */
-
 const { query } = require('../db');
-const { assertParticipant } = require('./conversations.controller');
-const { broadcastToConversation } = require('../ws/socketServer');
-const { sendPushNotification } = require('../utils/fcm');
 
-function toDto(row) {
+function toConversationDto(row) {
   return {
     id: row.id,
-    conversationId: row.conversation_id,
-    senderId: row.sender_id,
-    cipherText: row.cipher_text,
+    isGroup: row.is_group,
+    name: row.name,
     cipherA: row.cipher_a,
     cipherB: row.cipher_b,
-    isDeleted: row.is_deleted,
     createdAt: row.created_at,
+    lastReadMessageId: row.last_read_message_id,
   };
 }
 
-// Historique paginé (les plus récents en premier, pagination via "before")
-async function getHistory(req, res, next) {
+async function assertParticipant(conversationId, userId) {
+  const result = await query(
+    'SELECT 1 FROM conversation_participants WHERE conversation_id = $1 AND user_id = $2',
+    [conversationId, userId]
+  );
+
+  return result.rowCount > 0;
+}
+
+async function list(req, res, next) {
   try {
-    const conversationId = parseInt(req.params.id, 10);
-    if (!(await assertParticipant(conversationId, req.user.id))) {
-      return res.status(403).json({ error: "Vous ne participez pas à cette conversation." });
-    }
-
-    const limit = Math.min(parseInt(req.query.limit, 10) || 50, 100);
-    const before = req.query.before ? parseInt(req.query.before, 10) : null;
-
     const result = await query(
-      `SELECT * FROM messages
-       WHERE conversation_id = $1 AND ($2::int IS NULL OR id < $2::int)
-       ORDER BY id DESC LIMIT $3`,
-      [conversationId, before, limit]
+      `SELECT c.id, c.is_group, c.name, c.cipher_a, c.cipher_b, c.created_at, cp.last_read_message_id
+       FROM conversations c
+       JOIN conversation_participants cp ON cp.conversation_id = c.id
+       WHERE cp.user_id = $1
+       ORDER BY c.created_at DESC`,
+      [req.user.id]
     );
 
-    return res.json({ messages: result.rows.map(toDto).reverse() });
+    return res.json({ conversations: result.rows.map(toConversationDto) });
   } catch (err) {
     return next(err);
   }
 }
 
-/**
- * Envoie un message et déclenche une notification push FCM
- * pour tous les participants hors ligne ou en dehors de la conversation.
- */
-async function create(req, res, next) {
+async function createOrGet(req, res, next) {
   try {
-    const conversationId = parseInt(req.params.id, 10);
-    if (!(await assertParticipant(conversationId, req.user.id))) {
-      return res.status(403).json({ error: "Vous ne participez pas à cette conversation." });
+    const explicitUserId = req.body?.userId ?? req.body?.participantId;
+    const participantIds = Array.isArray(req.body?.participantIds)
+      ? req.body.participantIds
+      : explicitUserId
+        ? [explicitUserId]
+        : [];
+
+    const targetUserIds = participantIds
+      .map((id) => Number(id))
+      .filter((id) => Number.isInteger(id) && id > 0 && id !== Number(req.user.id));
+
+    if (targetUserIds.length === 0) {
+      return res.status(400).json({ error: 'Au moins un autre participant est requis.' });
     }
 
-    const { cipherText } = req.body;
-    if (!cipherText || !cipherText.trim()) {
-      return res.status(400).json({ error: 'cipherText est requis.' });
-    }
+    const isGroup = targetUserIds.length > 1;
 
-    // Récupère la clé de la conversation pour le snapshot
-    const convResult = await query(
-      'SELECT cipher_a, cipher_b FROM conversations WHERE id = $1',
-      [conversationId]
-    );
-    if (!convResult.rows[0]) {
-      return res.status(404).json({ error: 'Conversation introuvable.' });
-    }
-    const { cipher_a: cipherA, cipher_b: cipherB } = convResult.rows[0];
+    if (!isGroup) {
+      const existing = await query(
+        `SELECT c.id, c.is_group, c.name, c.cipher_a, c.cipher_b, c.created_at
+         FROM conversations c
+         JOIN conversation_participants cp1 ON cp1.conversation_id = c.id AND cp1.user_id = $1
+         JOIN conversation_participants cp2 ON cp2.conversation_id = c.id AND cp2.user_id = $2
+         WHERE c.is_group = FALSE
+         LIMIT 1`,
+        [req.user.id, targetUserIds[0]]
+      );
 
-    // Enregistre le message
-    const result = await query(
-      `INSERT INTO messages (conversation_id, sender_id, cipher_text, cipher_a, cipher_b)
-       VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-      [conversationId, req.user.id, cipherText, cipherA, cipherB]
-    );
-
-    const message = toDto(result.rows[0]);
-
-    // Diffuse en temps réel via WebSocket
-    broadcastToConversation(conversationId, req.user.id, {
-      type: 'message:new',
-      message,
-    });
-
-    // Récupère les infos de l'expéditeur pour le titre de la notification
-    const senderResult = await query(
-      'SELECT username FROM users WHERE id = $1',
-      [req.user.id]
-    );
-    const senderName = senderResult.rows[0]?.username || 'Quelqu\'un';
-
-    // Envoie une notification FCM à chaque autre participant
-    // uniquement s'il n'est pas actif sur la conversation (is_online = false
-    // ou pas de connexion WebSocket active sur cette conversation)
-    const participantsResult = await query(
-      `SELECT u.id, u.fcm_token, u.is_online
-       FROM users u
-       JOIN conversation_participants cp ON cp.user_id = u.id
-       WHERE cp.conversation_id = $1 AND u.id != $2`,
-      [conversationId, req.user.id]
-    );
-
-    for (const participant of participantsResult.rows) {
-      if (participant.fcm_token) {
-        await sendPushNotification(
-          participant.fcm_token,
-          senderName,                          // titre = nom de l'expéditeur
-          'Vous avez reçu un nouveau message', // corps (le texte chiffré n'est pas affiché)
-          {
-            conversationId: conversationId.toString(),
-            senderId: req.user.id.toString(),
-            senderName,
-          }
-        );
+      if (existing.rows[0]) {
+        return res.json({ conversation: toConversationDto(existing.rows[0]) });
       }
     }
 
-    return res.status(201).json({ message });
+    const conversationResult = await query(
+      `INSERT INTO conversations (is_group, name)
+       VALUES ($1, $2)
+       RETURNING id, is_group, name, cipher_a, cipher_b, created_at`,
+      [isGroup, isGroup ? null : null]
+    );
+
+    const conversation = conversationResult.rows[0];
+    const participantUserIds = [req.user.id, ...targetUserIds];
+
+    for (const userId of participantUserIds) {
+      await query(
+        `INSERT INTO conversation_participants (conversation_id, user_id)
+         VALUES ($1, $2)
+         ON CONFLICT (conversation_id, user_id) DO NOTHING`,
+        [conversation.id, userId]
+      );
+    }
+
+    return res.status(201).json({ conversation: toConversationDto(conversation) });
   } catch (err) {
     return next(err);
   }
 }
 
-// Suppression douce (seul l'expéditeur peut supprimer)
-async function remove(req, res, next) {
+async function getById(req, res, next) {
   try {
-    const messageId = parseInt(req.params.messageId, 10);
-    const msgResult = await query('SELECT * FROM messages WHERE id = $1', [messageId]);
-    const message = msgResult.rows[0];
-
-    if (!message) return res.status(404).json({ error: 'Message introuvable.' });
-    if (message.sender_id !== req.user.id) {
-      return res.status(403).json({ error: "Vous ne pouvez supprimer que vos propres messages." });
+    const conversationId = parseInt(req.params.id, 10);
+    if (!(await assertParticipant(conversationId, req.user.id))) {
+      return res.status(403).json({ error: 'Vous ne participez pas à cette conversation.' });
     }
 
-    await query('UPDATE messages SET is_deleted = TRUE WHERE id = $1', [messageId]);
+    const result = await query(
+      `SELECT c.id, c.is_group, c.name, c.cipher_a, c.cipher_b, c.created_at, cp.last_read_message_id
+       FROM conversations c
+       JOIN conversation_participants cp ON cp.conversation_id = c.id AND cp.user_id = $2
+       WHERE c.id = $1`,
+      [conversationId, req.user.id]
+    );
 
-    broadcastToConversation(message.conversation_id, req.user.id, {
-      type: 'message:deleted',
-      conversationId: message.conversation_id,
-      messageId,
-    });
+    if (!result.rows[0]) {
+      return res.status(404).json({ error: 'Conversation introuvable.' });
+    }
+
+    return res.json({ conversation: toConversationDto(result.rows[0]) });
+  } catch (err) {
+    return next(err);
+  }
+}
+
+async function updateKey(req, res, next) {
+  try {
+    const conversationId = parseInt(req.params.id, 10);
+    const { cipherA, cipherB } = req.body;
+
+    if (!(await assertParticipant(conversationId, req.user.id))) {
+      return res.status(403).json({ error: 'Vous ne participez pas à cette conversation.' });
+    }
+
+    await query(
+      'UPDATE conversations SET cipher_a = $2, cipher_b = $3 WHERE id = $1',
+      [conversationId, cipherA, cipherB]
+    );
 
     return res.json({ ok: true });
   } catch (err) {
@@ -151,4 +143,28 @@ async function remove(req, res, next) {
   }
 }
 
-module.exports = { getHistory, create, remove };
+async function markRead(req, res, next) {
+  try {
+    const conversationId = parseInt(req.params.id, 10);
+    const { messageId } = req.body;
+
+    if (!(await assertParticipant(conversationId, req.user.id))) {
+      return res.status(403).json({ error: 'Vous ne participez pas à cette conversation.' });
+    }
+
+    const result = await query(
+      'UPDATE conversation_participants SET last_read_message_id = $3 WHERE conversation_id = $1 AND user_id = $2',
+      [conversationId, req.user.id, messageId]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: 'Conversation introuvable.' });
+    }
+
+    return res.json({ ok: true });
+  } catch (err) {
+    return next(err);
+  }
+}
+
+module.exports = { list, createOrGet, getById, updateKey, markRead, assertParticipant };
