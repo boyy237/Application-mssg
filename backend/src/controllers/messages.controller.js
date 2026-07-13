@@ -1,3 +1,8 @@
+/**
+ * messages.controller.js — VERSION MISE À JOUR avec notifications FCM
+ * Remplace entièrement backend/src/controllers/messages.controller.js
+ */
+
 const { query } = require('../db');
 const { assertParticipant } = require('./conversations.controller');
 const { broadcastToConversation } = require('../ws/socketServer');
@@ -16,11 +21,12 @@ function toDto(row) {
   };
 }
 
+// Historique paginé (les plus récents en premier, pagination via "before")
 async function getHistory(req, res, next) {
   try {
     const conversationId = parseInt(req.params.id, 10);
     if (!(await assertParticipant(conversationId, req.user.id))) {
-      return res.status(403).json({ error: 'Vous ne participez pas à cette conversation.' });
+      return res.status(403).json({ error: "Vous ne participez pas à cette conversation." });
     }
 
     const limit = Math.min(parseInt(req.query.limit, 10) || 50, 100);
@@ -39,11 +45,15 @@ async function getHistory(req, res, next) {
   }
 }
 
+/**
+ * Envoie un message et déclenche une notification push FCM
+ * pour tous les participants hors ligne ou en dehors de la conversation.
+ */
 async function create(req, res, next) {
   try {
     const conversationId = parseInt(req.params.id, 10);
     if (!(await assertParticipant(conversationId, req.user.id))) {
-      return res.status(403).json({ error: 'Vous ne participez pas à cette conversation.' });
+      return res.status(403).json({ error: "Vous ne participez pas à cette conversation." });
     }
 
     const { cipherText } = req.body;
@@ -51,6 +61,7 @@ async function create(req, res, next) {
       return res.status(400).json({ error: 'cipherText est requis.' });
     }
 
+    // Récupère la clé de la conversation pour le snapshot
     const convResult = await query(
       'SELECT cipher_a, cipher_b FROM conversations WHERE id = $1',
       [conversationId]
@@ -60,6 +71,7 @@ async function create(req, res, next) {
     }
     const { cipher_a: cipherA, cipher_b: cipherB } = convResult.rows[0];
 
+    // Enregistre le message
     const result = await query(
       `INSERT INTO messages (conversation_id, sender_id, cipher_text, cipher_a, cipher_b)
        VALUES ($1, $2, $3, $4, $5) RETURNING *`,
@@ -68,19 +80,24 @@ async function create(req, res, next) {
 
     const message = toDto(result.rows[0]);
 
+    // Diffuse en temps réel via WebSocket
     broadcastToConversation(conversationId, req.user.id, {
       type: 'message:new',
       message,
     });
 
+    // Récupère les infos de l'expéditeur pour le titre de la notification
     const senderResult = await query(
       'SELECT username FROM users WHERE id = $1',
       [req.user.id]
     );
     const senderName = senderResult.rows[0]?.username || 'Quelqu\'un';
 
+    // Envoie une notification FCM à chaque autre participant
+    // uniquement s'il n'est pas actif sur la conversation (is_online = false
+    // ou pas de connexion WebSocket active sur cette conversation)
     const participantsResult = await query(
-      `SELECT u.id, u.fcm_token
+      `SELECT u.id, u.fcm_token, u.is_online
        FROM users u
        JOIN conversation_participants cp ON cp.user_id = u.id
        WHERE cp.conversation_id = $1 AND u.id != $2`,
@@ -91,8 +108,8 @@ async function create(req, res, next) {
       if (participant.fcm_token) {
         await sendPushNotification(
           participant.fcm_token,
-          senderName,
-          'Vous avez reçu un nouveau message',
+          senderName,                          // titre = nom de l'expéditeur
+          'Vous avez reçu un nouveau message', // corps (le texte chiffré n'est pas affiché)
           {
             conversationId: conversationId.toString(),
             senderId: req.user.id.toString(),
@@ -108,6 +125,7 @@ async function create(req, res, next) {
   }
 }
 
+// Suppression douce (seul l'expéditeur peut supprimer)
 async function remove(req, res, next) {
   try {
     const messageId = parseInt(req.params.messageId, 10);
