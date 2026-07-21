@@ -1,3 +1,0 @@
-com.ciphertalk.messenger.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme
