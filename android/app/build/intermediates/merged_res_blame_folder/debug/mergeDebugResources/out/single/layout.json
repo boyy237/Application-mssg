@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-mergeDebugResources-39:\\layout\\activity_chat.xml",
+        "source": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-main-42:\\layout\\activity_chat.xml"
+    },
+    {
+        "merged": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-mergeDebugResources-39:\\layout\\item_message_sent.xml",
+        "source": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-main-42:\\layout\\item_message_sent.xml"
+    },
+    {
+        "merged": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-mergeDebugResources-39:\\layout\\activity_new_conversation.xml",
+        "source": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-main-42:\\layout\\activity_new_conversation.xml"
+    },
+    {
+        "merged": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-mergeDebugResources-39:\\layout\\activity_register.xml",
+        "source": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-main-42:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-mergeDebugResources-39:\\layout\\dialog_key_settings.xml",
+        "source": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-main-42:\\layout\\dialog_key_settings.xml"
+    },
+    {
+        "merged": "com.ciphertalk.messenger.app-mergeDebugResources-39:/layout/item_message_received.xml",
+        "source": "com.ciphertalk.messenger.app-main-42:/layout/item_message_received.xml"
+    },
+    {
+        "merged": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-mergeDebugResources-39:\\layout\\activity_login.xml",
+        "source": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-main-42:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-mergeDebugResources-39:\\layout\\activity_conversations.xml",
+        "source": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-main-42:\\layout\\activity_conversations.xml"
+    },
+    {
+        "merged": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-mergeDebugResources-39:\\layout\\item_conversation.xml",
+        "source": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-main-42:\\layout\\item_conversation.xml"
+    },
+    {
+        "merged": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-mergeDebugResources-39:\\layout\\item_user_search.xml",
+        "source": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-main-42:\\layout\\item_user_search.xml"
+    },
+    {
+        "merged": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-mergeDebugResources-39:\\layout\\item_message_received.xml",
+        "source": "C:\\Users\\LENOVO\\.gradle\\daemon\\8.7\\com.ciphertalk.messenger.app-main-42:\\layout\\item_message_received.xml"
+    }
+]

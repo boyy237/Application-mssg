@@ -19,7 +19,6 @@ android {
         // - Téléphone physique sur le même Wi-Fi -> "http://VOTRE_IP_LOCALE:4000/"
         // - Serveur déployé en ligne -> votre URL HTTPS publique
         buildConfigField("String", "BASE_URL", "\"https://application-mssg-1.onrender.com/\"")
-
     }
 
     buildTypes {

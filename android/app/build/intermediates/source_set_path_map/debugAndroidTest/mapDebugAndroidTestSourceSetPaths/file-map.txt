@@ -1,0 +1,5 @@
+com.ciphertalk.messenger.test.app-core-1.6.1-0 C:\Users\LENOVO\.gradle\caches\transforms-4\e238063b2685689a021b0e65e01ca199\transformed\core-1.6.1\res
+com.ciphertalk.messenger.test.app-androidTest-1 C:\Users\LENOVO\StudioProjects\CipherTalkProject\CipherTalkProject\android\app\build\generated\res\resValues\androidTest\debug
+com.ciphertalk.messenger.test.app-mergeDebugAndroidTestResources-2 C:\Users\LENOVO\StudioProjects\CipherTalkProject\CipherTalkProject\android\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.ciphertalk.messenger.test.app-mergeDebugAndroidTestResources-3 C:\Users\LENOVO\StudioProjects\CipherTalkProject\CipherTalkProject\android\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.ciphertalk.messenger.test.app-debugAndroidTest-4 C:\Users\LENOVO\StudioProjects\CipherTalkProject\CipherTalkProject\android\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
